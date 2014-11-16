@@ -42,7 +42,35 @@ var Synth, AudioSynth, AudioSynthInstrument;
 		return this._volume;
 	});
 	setPub('getVolume', function() { return Math.round(this._volume/32768*10000)/10000; });
-	setPriv('_notes',{'C':261.63,'C#':277.18,'D':293.66,'D#':311.13,'E':329.63,'F':346.23,'F#':369.99,'G':392.00,'G#':415.30,'A':440.00,'A#':466.16,'B':493.88});
+	setPriv('_notes',{
+		'Cb':246.94,
+		'C':261.63,
+		'C#':277.18,
+
+		'Db':277.18,
+		'D':293.66,
+		'D#':311.13,
+
+		'Eb':311.13,
+		'E':329.63,
+		'E#':346.23,
+
+		'Fb':329.63,
+		'F':346.23,
+		'F#':369.99,
+
+		'Gb':369.99,
+		'G':392.00,
+		'G#':415.30,
+
+		'Ab':415.30,
+		'A':440.00,
+		'A#':466.16,
+
+		'Bb':466.16,
+		'B':493.88,
+		'B#':554.36
+	});
 	setPriv('_fileCache',[],true);
 	setPriv('_temp',{},true);
 	setPriv('_sounds',[],true);
