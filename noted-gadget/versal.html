@@ -40,7 +40,21 @@ input#notesJson {
 <script>
 
 var drawNotes = function(canvas, notes) {
-  console.log(canvas, notes);
+  var context = canvas[0].getContext('2d');
+
+  var drawLine = function(start_x, start_y, end_x, end_y) {
+    context.beginPath();
+    context.moveTo(start_x, start_y);
+    context.lineTo(end_x, end_y);
+    context.stroke();
+  }
+
+  drawLine(30, 20, 490, 20);
+  drawLine(30, 30, 490, 30);
+  drawLine(30, 40, 490, 40);
+  drawLine(30, 50, 490, 50);
+  drawLine(30, 60, 490, 60);
+
 }
 
 window.addEventListener('HTMLImportsLoaded', function(){
@@ -66,7 +80,7 @@ window.addEventListener('HTMLImportsLoaded', function(){
   player.on('attributesChanged', function(data) {
     if (data.notesJson) {
       $('#notesJson').val(data.notesJson);
-      drawNotes('le canvas', data.notesJson);
+      drawNotes($('#notesCanvas'), data.notesJson);
     }
     // if (data.greeting) {
     //   greeting.value = data.greeting;
