@@ -8,22 +8,28 @@
 </head>
 
 <body>
-<input type="text" name="greeting" readonly value="What is your name?">
-<input type="text" name="learnerName">
-<input type="text" name="notesJson">
+
+<input type="text" id="greeting" readonly value="What is your name?">
+<input type="text" id="learnerName">
+
+<div id="notesEditor">
+  <span>notes:</span>
+  <input type="text" id="notesJson">
+</div>
+
 <style>
 input {
   font-size: 20px;
   padding: 5px;
   min-width: 300px;
 }
-input[name=greeting] {
+input#greeting {
   border: 1px solid pink;
 }
-input[name=learnerName] {
+input#learnerName {
   border: 1px solid green;
 }
-input[name=notesJson] {
+input#notesJson {
   border: 1px solid blue;
 }
 </style>
@@ -32,20 +38,29 @@ input[name=notesJson] {
 <script>
 window.addEventListener('HTMLImportsLoaded', function(){
 
-  var greeting = document.querySelector('[name=greeting]');
-  var learnerName = document.querySelector('[name=learnerName]');
+  var greeting = $('#greeting')[0];
+  var learnerName = $('#learnerName')[0];
   var player = new VersalPlayerAPI();
   window.player = player;
 
-  greeting.addEventListener('change', function(e) {
+  greeting.addEventListener('change', function (e) {
     player.setAttribute(greeting.name, greeting.value);
   });
 
-  learnerName.addEventListener('change', function(e) {
+  learnerName.addEventListener('change', function (e) {
     player.setLearnerAttribute(learnerName.name, learnerName.value);
   });
 
+  $('#notesJson').change(function (e) {
+    player.setAttribute('notesJson', $('#notesJson').val());
+    console.log('notesJson change');
+  });
+
   player.on('attributesChanged', function(data) {
+    if (data.notesJson) {
+      console.log(data.notesJson);
+      $('#notesJson').val(data.notesJson);
+    }
     if (data.greeting) {
       greeting.value = data.greeting;
     };
@@ -63,11 +78,10 @@ window.addEventListener('HTMLImportsLoaded', function(){
     learnerName.readOnly = editable.editable;
 
     if (editable.editable) {
-      $('input[name=notesJson]').show();
+      $('#notesEditor').show();
     } else {
-      $('input[name=notesJson]').hide();
+      $('#notesEditor').hide();
     }
-
   });
 
   // player.setHeight(60);
