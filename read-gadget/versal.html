@@ -4,6 +4,7 @@
 <title>Music Reader</title>
 <script src="bower_components/versal-component-runtime/dist/runtime.min.js"></script>
 <script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="audiosynth.js"></script>
 <link rel="import" href="bower_components/versal-gadget-api/versal-gadget-api.html">
 </head>
 
@@ -12,36 +13,39 @@
 <div id="notesEditor">
 <span>Notes:<br></span>
   <textarea id="notesAbc">
-C1 C1 G1 G1|A1 A1 G2| F1 F1 E1 E1| D1 D1 C2|
+G C C D E4 G E E D C2
   </textarea>
-
 </div>
+
 	<span id="playBtn">Play</span>
 
 	<script type="text/javascript">
 
-	var path='assets/Piano.ff.';
-	var sound;
+	var piano = Synth.createInstrument('piano');
 	
-	var playSound = function () {
-		var notes=document.getElementById("notesAbc").value.split('\W');
-		var n;
-		
-		for(var i=0; i<notes.length; i++)
+	var read = function () {
+		var notes=document.getElementById("notesAbc").value.split(' ');
+		var n, i=0;
+
+		var counter = window.setInterval(function()
 		{
-			n=notes[i];
-			sound=new Audio(path + n.charAt(0) + '4.mp3');
-			sound.play();
-			
-			console.log(n);
-		}
+			if(i<notes.length-1)
+			{
+				n = notes[i++];
+				piano.play(n.charAt(0), 4, Math.floor(n.charAt(1)));
+				console.log(n);
+			}
+			else
+				window.clearInterval(counter);
+				
+		}, 300);
 	}
 
 	window.addEventListener('HTMLImportsLoaded', function(){
 
 	  var player = new VersalPlayerAPI();
 
-	  $('#playBtn').click(playSound);
+	  $('#playBtn').click(read);
 
 	  player.on('editableChanged', function(editableObj){
 	  });
