@@ -26,26 +26,26 @@
 
 	<script type="text/javascript">
 
-	var playInterval = function()
+	var path='assets/Piano.ff.';
+	var sound;
+	
+	var playSecond = function()
 	{
-		var path='assets/Piano.ff.';
-		var sound;
-
-
-		sound = new Audio(path + document.getElementById("note1").value + document.getElementById("x").value +'.mp3');
-		sound.play();
-
-
-		setTimeout(this, 200);
-
-
 		sound = new Audio(path + document.getElementById("note2").value + document.getElementById("y").value + '.mp3');
+		sound.play();
+	}
+	
+	var playFirst = function()
+	{
+		sound = new Audio(path + document.getElementById("note1").value + document.getElementById("x").value +'.mp3');
 		sound.play();
 
 		console.log('hi');
 
-	}
+		setTimeout(function(){playSecond()}, 200);
 
+	}
+	
 	var playSound = function () {
 		var path='assets/Piano.ff.';
 		var note='C';
@@ -62,7 +62,7 @@
 
 	  var player = new VersalPlayerAPI();
 
-	  $('#playBtn').click(playInterval);
+	  $('#playBtn').click(playFirst);
 
 	  player.on('editableChanged', function(editableObj){
 	  });
