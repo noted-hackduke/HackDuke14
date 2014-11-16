@@ -18,58 +18,78 @@
   <input id="note2">
 
 </div>
-	<span id="playBtn">Play</span>
 
-	<script type="text/javascript">
+<button id="playBtn">Play</button>
 
-	var playSound = function (sound) {
-		var piano = Synth.createInstrument('piano');
+<script type="text/javascript">
 
-		var note = sound.substr(0, sound.length - 1);
-		var octave = Math.floor(sound[sound.length - 1]);
+    var playSound = function (sound) {
+        var piano = Synth.createInstrument('piano');
 
-		console.log([note, octave]);
-		piano.play(note, octave, 1);
-	}
+        var note = sound.substr(0, sound.length - 1);
+        var octave = Math.floor(sound[sound.length - 1]);
 
-	var playChord = function (chord) {
-		if (chord.length === 0) {
-			return;
-		}
-		var sounds = chord.split(' ');
-		for (var i=0; i<sounds.length; i++) {
-			playSound(sounds[i]);
-		}
-	}
+        console.log([note, octave]);
+        piano.play(note, octave, 1);
+    }
 
-	var playSecond = function()
-	{
-		playChord($('#note2').val());
-	}
+    var playChord = function (chord) {
+        if (chord.length === 0) {
+            return;
+        }
+        var sounds = chord.split(' ');
+        for (var i=0; i<sounds.length; i++) {
+            playSound(sounds[i]);
+        }
+    }
 
-	var playFirst = function()
-	{
-		playChord($('#note1').val());
-		setTimeout(playSecond, 200);
-	}
+    var playSecond = function()
+    {
+        playChord($('#note2').val());
+    }
 
-	window.addEventListener('HTMLImportsLoaded', function(){
+    var playFirst = function()
+    {
+        playChord($('#note1').val());
+        setTimeout(playSecond, 200);
+    }
 
-	  var player = new VersalPlayerAPI();
+    window.addEventListener('HTMLImportsLoaded', function(){
 
-	  $('#playBtn').click(playFirst);
+        var player = new VersalPlayerAPI();
 
-	  player.on('editableChanged', function(editableObj){
-	  });
+        $('#playBtn').click(playFirst);
 
-	  player.on('attributesChanged', function(attrs){
-	  });
+        player.on('editableChanged', function (editable){
+            if (editable.editable) {
+                $('#notesEditor').show();
+            } else {
+                $('#notesEditor').hide();
+            }
+        });
 
-	  player.startListening();
-	  player.watchBodyHeight();
+        $('#note1').change(function (e) {
+            player.setAttribute('note1', $('#note1').val());
+        });
+        $('#note2').change(function (e) {
+            player.setAttribute('note2', $('#note2').val());
+        });
 
-	});
 
-	</script>
+        player.on('attributesChanged', function(attrs){
+            if (attrs.note1) {
+                $('#note1').val(attrs.note1);
+            }
+            if (attrs.note2) {
+                $('#note2').val(attrs.note2);
+            }
+        });
+
+        player.startListening();
+        player.watchBodyHeight();
+
+    });
+
+</script>
 </body>
 </html>
