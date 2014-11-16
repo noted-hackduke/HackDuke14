@@ -25,14 +25,17 @@
 	var playSound = function (sound) {
 		var piano = Synth.createInstrument('piano');
 
-		var note = sound[0];
-		var octave = Math.floor(sound[1]);
+		var note = sound.substr(0, sound.length - 1);
+		var octave = Math.floor(sound[sound.length - 1]);
 
-		console.log(note, octave);
+		console.log([note, octave]);
 		piano.play(note, octave, 1);
 	}
 
 	var playChord = function (chord) {
+		if (chord.length === 0) {
+			return;
+		}
 		var sounds = chord.split(' ');
 		for (var i=0; i<sounds.length; i++) {
 			playSound(sounds[i]);
