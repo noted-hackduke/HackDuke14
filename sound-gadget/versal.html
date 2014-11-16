@@ -4,6 +4,7 @@
 <title>Interval Player</title>
 <script src="bower_components/versal-component-runtime/dist/runtime.min.js"></script>
 <script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="audiosynth.js"></script>
 <link rel="import" href="bower_components/versal-gadget-api/versal-gadget-api.html">
 </head>
 
@@ -37,10 +38,16 @@
 
 	var playFirst = function()
 	{
-		sound = new Audio(path + document.getElementById("note1").value + document.getElementById("x").value +'.mp3');
-		sound.play();
 
-		setTimeout(function(){playSecond()}, 200);
+		var piano = Synth.createInstrument('piano');
+		piano.play('C', 4, 2);
+
+		// sound = new Audio(path + document.getElementById("note1").value + document.getElementById("x").value +'.mp3');
+		// sound.play();
+
+		// setTimeout(function(){playSecond()}, 200);
+
+		console.log('yolo');
 
 	}
 
