@@ -4,19 +4,32 @@
 <title>Empty gadget</title>
 <script src="bower_components/versal-component-runtime/dist/runtime.min.js"></script>
 <script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="http://abcjs.net/abcjs_editor_1.10-min.js"></script>
 <link rel="import" href="bower_components/versal-gadget-api/versal-gadget-api.html">
 </head>
 
 <body>
-
-<canvas id="notesCanvas" width="500" height="100"></canvas>
 
 <!-- <input type="text" id="greeting" readonly value="What is your name?">
 <input type="text" id="learnerName"> -->
 
 <div id="notesEditor">
   <span>notes:</span>
-  <input type="text" id="notesJson">
+  <textarea id="notesAbc">
+X:1
+T: Cooley's
+M: 4/4
+L: 1/8
+R: reel
+K: Emin
+|:D2|EB{c}BA B2 EB|~B2 AB dBAG|FDAD BDAD|FDAD dAFD|
+EBBA B2 EB|B2 AB defg|afe^c dBAF|DEFD E2:|
+|:gf|eB B2 efge|eB B2 gedB|A2 FA DAFA|A2 FA defg|
+eB B2 eBgB|eB B2 defg|afe^c dBAF|DEFD E2:|
+  </textarea>
+</div>
+
+<div id="notation">
 </div>
 
 <style>
@@ -31,7 +44,7 @@ input {
 input#learnerName {
   border: 1px solid green;
 }*/
-input#notesJson {
+#notesAbc {
   border: 1px solid blue;
 }
 </style>
@@ -39,22 +52,8 @@ input#notesJson {
 
 <script>
 
-var drawNotes = function(canvas, notes) {
-  var context = canvas[0].getContext('2d');
-
-  var drawLine = function(start_x, start_y, end_x, end_y) {
-    context.beginPath();
-    context.moveTo(start_x, start_y);
-    context.lineTo(end_x, end_y);
-    context.stroke();
-  }
-
-  drawLine(30, 20, 490, 20);
-  drawLine(30, 30, 490, 30);
-  drawLine(30, 40, 490, 40);
-  drawLine(30, 50, 490, 50);
-  drawLine(30, 60, 490, 60);
-
+var drawNotes = function(notes) {
+  ABCJS.renderAbc('notation', notes);
 }
 
 window.addEventListener('HTMLImportsLoaded', function(){
@@ -73,14 +72,14 @@ window.addEventListener('HTMLImportsLoaded', function(){
   //   player.setLearnerAttribute(learnerName.name, learnerName.value);
   // });
 
-  $('#notesJson').change(function (e) {
-    player.setAttribute('notesJson', $('#notesJson').val());
+  $('#notesAbc').change(function (e) {
+    player.setAttribute('notesAbc', $('#notesAbc').val());
   });
 
   player.on('attributesChanged', function(data) {
-    if (data.notesJson) {
-      $('#notesJson').val(data.notesJson);
-      drawNotes($('#notesCanvas'), data.notesJson);
+    if (data.notesAbc) {
+      $('#notesAbc').val(data.notesAbc);
+      drawNotes(data.notesAbc);
     }
     // if (data.greeting) {
     //   greeting.value = data.greeting;
@@ -104,8 +103,10 @@ window.addEventListener('HTMLImportsLoaded', function(){
     }
   });
 
-  player.setHeight(200);
+  player.setHeight(600);
   player.startListening();
+
+  drawNotes($('#notesAbc').val());
 });
 </script>
 </html>
