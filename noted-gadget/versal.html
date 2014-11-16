@@ -38,12 +38,6 @@ input {
   padding: 5px;
   min-width: 300px;
 }
-/*input#greeting {
-  border: 1px solid pink;
-}
-input#learnerName {
-  border: 1px solid green;
-}*/
 #notesAbc {
   border: 1px solid blue;
 }
@@ -101,8 +95,8 @@ window.addEventListener('HTMLImportsLoaded', function(){
     }
   });
 
-  player.setHeight(600);
   player.startListening();
+  player.watchBodyHeight();
 
   drawNotes($('#notesAbc').val());
 });

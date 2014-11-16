@@ -1,7 +1,7 @@
 {
   "launcher": "iframe",
   "name": "noted-gadget",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "title": "Notes",
   "description": "Shows and plays notes",
   "author": "anonymous",
