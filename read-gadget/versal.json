@@ -1,0 +1,10 @@
+{
+  "launcher": "iframe",
+  "name": "sound-gadget",
+  "version": "0.0.3",
+  "title": "Interval",
+  "description": "Plays intervals",
+  "author": "anonymous",
+  "defaultConfig": {},
+  "defaultUserState": {}
+}

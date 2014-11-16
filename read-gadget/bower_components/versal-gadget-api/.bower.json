@@ -1,0 +1,40 @@
+{
+  "name": "versal-gadget-api",
+  "main": [
+    "index.html",
+    "versal-player-api.js",
+    "versal-gadget-theme.css",
+    "versal-challenges-api.js"
+  ],
+  "version": "0.0.1",
+  "homepage": "https://github.com/Versal/versal-gadget-api",
+  "authors": [
+    "Versal Team <support@versal.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "./",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "eventEmitter": "~4.2.7",
+    "underscore": "~1.6.0",
+    "normalize-css": "~3.0.1"
+  },
+  "devDependencies": {
+    "versal-component-runtime": "~0.2.1"
+  },
+  "_release": "0.0.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.0.1",
+    "commit": "04e30f886bfb812b8cc8db8998366759baa9efd0"
+  },
+  "_source": "git://github.com/Versal/versal-gadget-api.git",
+  "_target": "0.0.1",
+  "_originalSource": "versal-gadget-api"
+}
