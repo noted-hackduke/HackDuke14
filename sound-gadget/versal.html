@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Note Reader</title>
+<title>Interval Player</title>
 <script src="bower_components/versal-component-runtime/dist/runtime.min.js"></script>
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <link rel="import" href="bower_components/versal-gadget-api/versal-gadget-api.html">
@@ -9,10 +9,39 @@
 
 <body>
 
+<div id="notesEditor">
+  <span>First note:</span>
+  <textarea id="note1"></textarea>
+  <span>Octave:</span>
+  <textarea id="x"></textarea><br>
+  
+  <span>Second note:</span>
+  <textarea id="note2"></textarea>
+  
+  <span>Octave:</span>
+  <textarea id="y"></textarea><br><br>
+  
+  <!--//<span>interval:<br></span>-->
+  <!--<textarea id="m"> </textarea><textarea id="interval"> </textarea><br>-->
+</div>
 	<span id="playBtn">Play</span>
 
 	<script type="text/javascript">
-
+	<!--var notes=["A","Ab","B","Bb","C","D","Db","E","Eb","F","G","Gb"];-->
+	<!--var getInterval = function(){}-->
+	
+	var playInterval = function()
+	{
+		var path='assets/Piano.ff.';
+		var sound;
+		
+		sound=new Audio(path + document.getElementById("note1").value + document.getElementById("x").value +'.mp3');
+		sound.play();
+		setTimeout(this, 200);
+		sound=new Audio(path + document.getElementById("note2").value + document.getElementById("y").value + '.mp3');
+		sound.play();
+	}
+	
 	var playSound = function () {
 		var path='assets/Piano.ff.';
 		var note='C';
@@ -29,11 +58,11 @@
 
 	  var player = new VersalPlayerAPI();
 
-	  $('#playBtn').click(playSound);
+	  $('#playBtn').click(playInterval);
 
 	  player.on('editableChanged', function(editableObj){
 	  });
-
+s
 	  player.on('attributesChanged', function(attrs){
 	  });
 
