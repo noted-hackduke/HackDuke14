@@ -15,8 +15,11 @@ input {
   padding: 5px;
   min-width: 300px;
 }
-input[readonly] {
-  border: 1px solid transparent;
+input[name=greeting] {
+  border: 1px solid pink;
+}
+input[name=learnerName] {
+  border: 1px solid green;
 }
 </style>
 </body>
@@ -27,23 +30,25 @@ window.addEventListener('HTMLImportsLoaded', function(){
   var greeting = document.querySelector('[name=greeting]');
   var learnerName = document.querySelector('[name=learnerName]');
   var player = new VersalPlayerAPI();
+  window.player = player;
 
-  greeting.addEventListener('change', function(e){
+  greeting.addEventListener('change', function(e) {
     player.setAttribute(greeting.name, greeting.value);
   });
 
-  learnerName.addEventListener('change', function(e){
+  learnerName.addEventListener('change', function(e) {
     player.setLearnerAttribute(learnerName.name, learnerName.value);
   });
 
-  player.on('attributesChanged', function(data){
-    if(data.greeting) {
+  player.on('attributesChanged', function(data) {
+    if (data.greeting) {
       greeting.value = data.greeting;
     };
   });
 
-  player.on('learnerStateChanged', function(data){
-    if(data.learnerName) {
+  player.on('learnerStateChanged', function(data) {
+    console.log('learnerStateChanged');
+    if (data.learnerName) {
       learnerName.value = data.learnerName;
     };
   });
