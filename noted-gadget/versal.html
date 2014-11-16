@@ -9,8 +9,10 @@
 
 <body>
 
-<input type="text" id="greeting" readonly value="What is your name?">
-<input type="text" id="learnerName">
+<canvas id="notesCanvas" width="500" height="100"></canvas>
+
+<!-- <input type="text" id="greeting" readonly value="What is your name?">
+<input type="text" id="learnerName"> -->
 
 <div id="notesEditor">
   <span>notes:</span>
@@ -23,12 +25,12 @@ input {
   padding: 5px;
   min-width: 300px;
 }
-input#greeting {
+/*input#greeting {
   border: 1px solid pink;
 }
 input#learnerName {
   border: 1px solid green;
-}
+}*/
 input#notesJson {
   border: 1px solid blue;
 }
@@ -36,6 +38,11 @@ input#notesJson {
 </body>
 
 <script>
+
+var drawNotes = function(canvas, notes) {
+  console.log(canvas, notes);
+}
+
 window.addEventListener('HTMLImportsLoaded', function(){
 
   var greeting = $('#greeting')[0];
@@ -43,39 +50,38 @@ window.addEventListener('HTMLImportsLoaded', function(){
   var player = new VersalPlayerAPI();
   window.player = player;
 
-  greeting.addEventListener('change', function (e) {
-    player.setAttribute(greeting.name, greeting.value);
-  });
+  // greeting.addEventListener('change', function (e) {
 
-  learnerName.addEventListener('change', function (e) {
-    player.setLearnerAttribute(learnerName.name, learnerName.value);
-  });
+  //   player.setAttribute(greeting.name, greeting.value);
+  // });
+
+  // learnerName.addEventListener('change', function (e) {
+  //   player.setLearnerAttribute(learnerName.name, learnerName.value);
+  // });
 
   $('#notesJson').change(function (e) {
     player.setAttribute('notesJson', $('#notesJson').val());
-    console.log('notesJson change');
   });
 
   player.on('attributesChanged', function(data) {
     if (data.notesJson) {
-      console.log(data.notesJson);
       $('#notesJson').val(data.notesJson);
+      drawNotes('le canvas', data.notesJson);
     }
-    if (data.greeting) {
-      greeting.value = data.greeting;
-    };
+    // if (data.greeting) {
+    //   greeting.value = data.greeting;
+    // };
   });
 
-  player.on('learnerStateChanged', function(data) {
-    console.log('learnerStateChanged');
-    if (data.learnerName) {
-      learnerName.value = data.learnerName;
-    };
-  });
+  // player.on('learnerStateChanged', function(data) {
+  //   if (data.learnerName) {
+  //     learnerName.value = data.learnerName;
+  //   };
+  // });
 
   player.on('editableChanged', function(editable){
-    greeting.readOnly = !editable.editable;
-    learnerName.readOnly = editable.editable;
+    // greeting.readOnly = !editable.editable;
+    // learnerName.readOnly = editable.editable;
 
     if (editable.editable) {
       $('#notesEditor').show();
@@ -84,7 +90,7 @@ window.addEventListener('HTMLImportsLoaded', function(){
     }
   });
 
-  // player.setHeight(60);
+  player.setHeight(200);
   player.startListening();
 });
 </script>
