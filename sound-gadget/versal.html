@@ -15,6 +15,8 @@
 	</div>
 
 	<script type="text/javascript">
+	window.addEventListener('HTMLImportsLoaded', function(){
+
 	  var player = new VersalPlayerAPI();
 
 	  player.on('editableChanged', function(editableObj){
@@ -30,6 +32,8 @@
 
 	  // continuously watch for changes in height
 	  player.watchBodyHeight();
+
+	});
 
 	</script>
 </body>
