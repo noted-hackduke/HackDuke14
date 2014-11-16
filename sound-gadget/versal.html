@@ -32,23 +32,18 @@
 
 	var playSecond = function()
 	{
-		sound = new Audio(path + document.getElementById("note2").value + document.getElementById("y").value + '.mp3');
-		sound.play();
+		var piano = Synth.createInstrument('piano');
+		piano.play($('#note2').val(), Math.floor($('#y').val()), 1);
+
 	}
 
 	var playFirst = function()
 	{
 
 		var piano = Synth.createInstrument('piano');
-		piano.play('C', 4, 2);
+		piano.play($('#note1').val(), Math.floor($('#x').val()), 1);
 
-		// sound = new Audio(path + document.getElementById("note1").value + document.getElementById("x").value +'.mp3');
-		// sound.play();
-
-		// setTimeout(function(){playSecond()}, 200);
-
-		console.log('yolo');
-
+		setTimeout(function(){playSecond()}, 200);
 	}
 
 	var playSound = function () {
