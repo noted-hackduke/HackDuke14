@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Note Reader</title>
+<script src="bower_components/versal-component-runtime/dist/runtime.min.js"></script>
+<link rel="import" href="bower_components/versal-gadget-api/versal-gadget-api.html">
+</head>
+
+<body>
+	<div id="soundPlayer">
+		<script>
+			var note=new Audio('assets/C4.mp3');
+			note.play();
+		</script>
+	</div>
+
+	<script type="text/javascript">
+	  var player = new VersalPlayerAPI();
+
+	  player.on('editableChanged', function(editableObj){
+		console.log('editableChanged', editableObj);
+	  });
+
+	  player.on('attributesChanged', function(attrs){
+		console.log('attributesChanged', attrs);
+	  });
+
+	  // send this command to receive initial events
+	  player.startListening();
+
+	  // continuously watch for changes in height
+	  player.watchBodyHeight();
+
+	</script>
+</body>
+</html>
