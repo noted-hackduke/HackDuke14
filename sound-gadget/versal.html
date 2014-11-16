@@ -27,9 +27,6 @@
 
 	<script type="text/javascript">
 
-	var path='assets/Piano.ff.';
-	var sound;
-
 	var playSecond = function()
 	{
 		var piano = Synth.createInstrument('piano');
@@ -44,17 +41,6 @@
 		piano.play($('#note1').val(), Math.floor($('#x').val()), 1);
 
 		setTimeout(function(){playSecond()}, 200);
-	}
-
-	var playSound = function () {
-		var note;
-		
-		for(var i=0; i<=7; i++)
-		{
-			sound=new Audio(path + note + i + '.mp3');
-			sound.play();
-		}
-		console.log('played sound!');
 	}
 
 	window.addEventListener('HTMLImportsLoaded', function(){
