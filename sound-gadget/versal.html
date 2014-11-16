@@ -14,8 +14,14 @@
 	<script type="text/javascript">
 
 	var playSound = function () {
-		var note=new Audio('assets/C4.mp3');
-		note.play();
+		var path='assets/Piano.ff.';
+		var note='C';
+		var sound;
+		for(var i=0; i<=7; i++)
+		{
+			sound=new Audio(path + note + i + '.mp3');
+			sound.play();
+		}
 		console.log('played sound!');
 	}
 
