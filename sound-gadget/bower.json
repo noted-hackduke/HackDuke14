@@ -1,10 +1,10 @@
 {
-  "name": "versal-gadget-template",
+  "name": "versal-sound",
   "version": "0.0.1",
   "authors": [
     "Anonymous <anonymous@versal.com>"
   ],
-  "description": "Versal gadget template",
+  "description": "Plays a give interval",
   "main": "versal.html",
   "license": "MIT",
   "private": true,

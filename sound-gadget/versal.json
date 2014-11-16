@@ -1,9 +1,9 @@
 {
   "launcher": "iframe",
-  "name": "noted-gadget",
-  "version": "0.0.2",
-  "title": "My gadget",
-  "description": "Does nothing just yet",
+  "name": "sound-gadget",
+  "version": "0.0.1",
+  "title": "Interval",
+  "description": "Plays intervals",
   "author": "anonymous",
   "defaultConfig": {},
   "defaultUserState": {}
