@@ -32,15 +32,21 @@
 		piano.play(note, octave, 1);
 	}
 
+	var playChord = function (chord) {
+		var sounds = chord.split(' ');
+		for (var i=0; i<sounds.length; i++) {
+			playSound(sounds[i]);
+		}
+	}
+
 	var playSecond = function()
 	{
-		playSound($('#note2').val());
+		playChord($('#note2').val());
 	}
 
 	var playFirst = function()
 	{
-
-		playSound($('#note1').val());
+		playChord($('#note1').val());
 		setTimeout(playSecond, 200);
 	}
 
