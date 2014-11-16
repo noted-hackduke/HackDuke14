@@ -12,35 +12,36 @@
 
 <div id="notesEditor">
   <span>Note 1: </span>
-  <textarea id="note1"></textarea>
-  <span> Octave: </span>
-  <textarea id="x"></textarea><br>
+  <input id="note1">
 
   <span>Note 2: </span>
-  <textarea id="note2"></textarea>
-
-  <span> Octave: </span>
-  <textarea id="y"></textarea><br><br>
+  <input id="note2">
 
 </div>
 	<span id="playBtn">Play</span>
 
 	<script type="text/javascript">
 
+	var playSound = function (sound) {
+		var piano = Synth.createInstrument('piano');
+
+		var note = sound[0];
+		var octave = Math.floor(sound[1]);
+
+		console.log(note, octave);
+		piano.play(note, octave, 1);
+	}
+
 	var playSecond = function()
 	{
-		var piano = Synth.createInstrument('piano');
-		piano.play($('#note2').val(), Math.floor($('#y').val()), 1);
-
+		playSound($('#note2').val());
 	}
 
 	var playFirst = function()
 	{
 
-		var piano = Synth.createInstrument('piano');
-		piano.play($('#note1').val(), Math.floor($('#x').val()), 1);
-
-		setTimeout(function(){playSecond()}, 200);
+		playSound($('#note1').val());
+		setTimeout(playSecond, 200);
 	}
 
 	window.addEventListener('HTMLImportsLoaded', function(){
