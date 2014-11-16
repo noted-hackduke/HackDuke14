@@ -3,12 +3,14 @@
 <head>
 <title>Empty gadget</title>
 <script src="bower_components/versal-component-runtime/dist/runtime.min.js"></script>
+<script src="bower_components/jquery/dist/jquery.js"></script>
 <link rel="import" href="bower_components/versal-gadget-api/versal-gadget-api.html">
 </head>
 
 <body>
 <input type="text" name="greeting" readonly value="What is your name?">
 <input type="text" name="learnerName">
+<input type="text" name="notesJson">
 <style>
 input {
   font-size: 20px;
@@ -20,6 +22,9 @@ input[name=greeting] {
 }
 input[name=learnerName] {
   border: 1px solid green;
+}
+input[name=notesJson] {
+  border: 1px solid blue;
 }
 </style>
 </body>
@@ -56,9 +61,16 @@ window.addEventListener('HTMLImportsLoaded', function(){
   player.on('editableChanged', function(editable){
     greeting.readOnly = !editable.editable;
     learnerName.readOnly = editable.editable;
+
+    if (editable.editable) {
+      $('input[name=notesJson]').show();
+    } else {
+      $('input[name=notesJson]').hide();
+    }
+
   });
 
-  player.setHeight(60);
+  // player.setHeight(60);
   player.startListening();
 });
 </script>

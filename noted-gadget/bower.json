@@ -17,6 +17,7 @@
   ],
   "dependencies": {
     "versal-gadget-api": "0.0.1",
-    "versal-component-runtime": "~0.2.4"
+    "versal-component-runtime": "~0.2.4",
+    "jquery": "1.11.1"
   }
 }
